@@ -1,16 +1,44 @@
-import React,{useState} from 'react';
+import axios from 'axios';
+import React,{useState, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage(){
 
     const[inputLoginValue,setInputValue] = useState('');
+    
+    const[inputPassValue,setInputPassValue] = useState('');
 
+    const navigate = useNavigate();
 
-    const handleChange =(event) =>{
+    const handleChange =(event) =>{ //изменение пароля
       setInputValue(event.target.value)
     }
+    const handleChangePass = (event) =>{ //изменение пароля
+      setInputPassValue(event.target.value);
+    }
 
-    function Test(){
+      const handleKeyPress= (event)=>{
+        if(event.key === 'Enter'){
+          handelSubmit();
+          
+        }
+      }
+    const handelSubmit = async() =>{
+      
       console.log('Ваш логин ',inputLoginValue);
+      console.log('Ваш пароль', inputPassValue);
+      try{
+        const response = await axios.post('http://localhost:3000/api/auth',{
+          login:inputLoginValue,
+          password:inputPassValue
+        });
+        console.log('response = ', response.data);
+        navigate('/main')
+      }
+      catch(error){
+        console.error(error);
+        useRef('login_password').current.focus();
+      }
     }
     return( 
        <form className='parent'>
@@ -35,10 +63,10 @@ function LoginPage(){
         </svg>
           <label className='login_label'>PASSWORD</label>
           <br/>
-          <input type='password' className='login_input'></input>
+          <input type='password' id='login_password' className='login_input' onChange={handleChangePass} onKeyDown={handleKeyPress}></input>
         </div>
         <div>
-          <input type='button' className='login_button' value={'Sign in'} onClick={Test}></input>
+          <input type='button' className='login_button' value={'Sign in'} id='login_button' onClick={handelSubmit}></input>
         </div>
         </div>
           
