@@ -68,5 +68,4 @@ code {
   width: 35px;
   height: 35px;
   transform: translate(-150%, 85%);
-  fill: currentColor; /* Использует текущий цвет текста */
 }
