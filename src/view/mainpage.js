@@ -1,4 +1,5 @@
 import React from 'react'
+import inputLoginValue from '../login/login'
 
     const MainPage = () =>{
 
@@ -8,6 +9,7 @@ import React from 'react'
             <h1>OAOAOAOAOOAO</h1>
         </div>
     )
+    
     }
 
 export default MainPage;

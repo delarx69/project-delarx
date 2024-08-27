@@ -33,11 +33,12 @@ function LoginPage(){
           password:inputPassValue
         });
         console.log('response = ', response.data);
-        navigate('/main')
+        navigate('/main');
+        setTimeout(()=>{alert(`Добро пожаловать, ${inputLoginValue}`)},100)
       }
       catch(error){
         console.error(error);
-        useRef('login_password').current.focus();
+        // useRef('login_password').current.focus();
       }
     }
     return( 
